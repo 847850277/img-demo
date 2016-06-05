@@ -18,12 +18,12 @@ import javax.imageio.ImageIO;
 public class App 
 {
     public static void main( String[] args ) throws Exception{
-    	//createImgWithWhiteBackground();
+    	//createImgWithWhiteBackground();ss
     	//createImgWithTransparency();
     	createImgWithFont();
     }
-    
-    
+
+
     /**
      * 创建一张背景为全白的图片
      */
@@ -77,7 +77,7 @@ public class App
     	int width = 100;   
         int height = 100;   
         Font font = new Font("宋体", Font.PLAIN, 12);
-        File file = new File("H:/image.jpg");   
+        File file = new File("F:/image.jpg");
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);   
         Graphics2D g2 = (Graphics2D)bi.getGraphics();   
         g2.setBackground(Color.WHITE);//背景色
@@ -89,8 +89,14 @@ public class App
         ImageIO.write(bi, "jpg", file);
         System.out.println("图片创建成功");
     }
-    
-    
-    
+
+    /**
+     * 图片叠加图片
+     */
+    public static  void  createImgAndAddImg(){
+
+    }
+
+
     
 }
