@@ -356,4 +356,16 @@ public class CreateImage {
 }
 ```
 
+**设置图片的背景色**
+
+API中Graphics2D的setBackground方法：
+
+```
+
+
+
+```
+
+
+
 

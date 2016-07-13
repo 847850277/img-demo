@@ -1,5 +1,6 @@
 package com.zp.img_demo;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,9 +12,28 @@ import javax.imageio.ImageIO;
  */
 public class CreateImage {
 	public static void main(String[] args) throws Exception{
-        File file = new File("H:/image.jpg");   
+		//CreateImg();
+		setImgBackColor();
+		
+	}
+	
+	/**
+	 * 创建一个最简单的图片
+	 * @throws Exception
+	 */
+	public static void  CreateImg() throws Exception{
+		File file = new File("H:/image.jpg");   
         BufferedImage bi = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);   
         Graphics2D g2 = (Graphics2D)bi.getGraphics();   
-        ImageIO.write(bi, "jpg", file);   
+        ImageIO.write(bi, "jpg", file);
 	}
+	
+	public static void setImgBackColor() throws Exception{
+		File file = new File("H:/image.jpg");   
+        BufferedImage bi = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);   
+        Graphics2D g2 = (Graphics2D)bi.getGraphics();
+        g2.setBackground(Color.BLUE);
+        ImageIO.write(bi, "jpg", file);
+	}
+	
 }
