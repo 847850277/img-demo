@@ -358,7 +358,22 @@ public class CreateImage {
 
 **设置图片的背景色**
 
-API中Graphics2D的setBackground方法：
+**API中Graphics2D的setBackground方法：**
+>设置 Graphics2D 上下文的背景色。背景色用于清除区域。当为 Component 构建 Graphics2D 时，可以从 Component 继承背景色。设置 Graphics2D 上下文中的背景色仅影响后续 clearRect 调用，不影响该 Component 的背景色。要更改 Component 的背景，请使用该 Component 的相应方法。 
+
+>参数：
+>color - 在对 clearRect 的后续调用中所用的背景色
+
+**Graphics类（Graphics2D父类）的clearRect方法:**
+>通过使用当前绘图表面的背景色进行填充来清除指定的矩形。此操作不使用当前绘图模式。 
+从 Java 1.1 开始，离屏图像的背景色可能与系统相关。应用程序应该使用 setColor，然后使用 fillRect，以确保离屏图像被清除为指定颜色。 
+
+
+>参数：
+x - 要清除矩形的 x 坐标。
+y - 要清除矩形的 y 坐标。
+width - 要清除矩形的宽度。
+height - 要清除矩形的高度。
 
 ```
 
