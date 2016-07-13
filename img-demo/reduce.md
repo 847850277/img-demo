@@ -362,6 +362,19 @@ API中Graphics2D的setBackground方法：
 
 ```
 
+public static void setImgBackColor() throws Exception{
+		
+		File file = new File("H:/image.jpg");   
+        BufferedImage bi = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);   
+        Graphics2D g2 = (Graphics2D)bi.getGraphics();
+		//g2.setBackground(Color.BLUE);
+		//g2.setBackground(Color.CYAN);
+		g2.setBackground(Color.GREEN);
+		//g2.setBackground(Color.red);
+		g2.clearRect(0,0,200,200);//设置背景颜色的时候调用此方法
+		ImageIO.write(bi, "jpg", file);
+	
+	}
 
 
 ```
