@@ -18,7 +18,9 @@ public class CreateImage {
 		//createGifImg();
 		//createTransparentImg();
 		//createTransparentImg("测试透明背景增加文字");
-		createTransparentImg(new File("H://666.jpg"));
+		//createTransparentImg(new File("H://666.jpg"));
+		//zoomImg();
+		rotateImg();
 	}
 	
 	/**
@@ -174,5 +176,47 @@ public class CreateImage {
 
 
 	}
+
+
+	/**
+	 * 缩放图片,把原图缩放50%
+	 * @throws Exception
+     */
+
+	public static void zoomImg() throws  Exception{
+
+		File file = new File("H:/image.png");
+		BufferedImage sourceImg = ImageIO.read(file);
+
+		File targetFile = new File("H:/target.png");
+		BufferedImage image = new BufferedImage(sourceImg.getWidth()/2,sourceImg.getHeight()/2,sourceImg.getType());
+		Graphics2D g2 = image.createGraphics();
+		// ---------- 增加下面的代码使得背景透明 -----------------
+		image = g2.getDeviceConfiguration().createCompatibleImage(sourceImg.getWidth()/2,sourceImg.getWidth()/2, Transparency.TRANSLUCENT);
+		g2 = image.createGraphics();
+		// ---------- 背景透明代码结束 -----------------
+		g2.drawRect(0, 0, 0 , 0 );//设置背景为透明的时候得调用此方法
+		g2.drawImage(sourceImg,0,0,sourceImg.getWidth()/2,sourceImg.getHeight()/2,null);
+		ImageIO.write(image,"png",targetFile);
+
+	}
+
+
+	/**
+	 * 旋转图片
+	 * @throws Exception
+     */
+
+	public static void rotateImg() throws  Exception{
+
+
+
+
+	}
+
+
+
+
+
 
 }
