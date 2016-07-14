@@ -18,6 +18,7 @@ public class CreateImage {
 		//createGifImg();
 		//createTransparentImg();
 		//createTransparentImg("测试透明背景增加文字");
+		createTransparentImg(new File("H://666.jpg"));
 	}
 	
 	/**
@@ -144,6 +145,32 @@ public class CreateImage {
 		g2.drawRect(0, 0, 0 , 0 );//设置背景为透明的时候得调用此方法
 		g2.drawString(text,50,50);
 		ImageIO.write(image, "png", file);
+
+
+	}
+
+	/**
+	 * 背景透明的图片增加水印
+	 * @param file2 水印图片
+	 * @throws Exception
+     */
+
+	public static void createTransparentImg(File file2) throws  Exception{
+
+		File file = new File("H:/image.png");
+		File source_file = file2;
+		Image src_img = ImageIO.read(source_file);//水印图片文件
+		BufferedImage image = new BufferedImage(200,200,BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2 = image.createGraphics();
+		// ---------- 增加下面的代码使得背景透明 -----------------
+		image = g2.getDeviceConfiguration().createCompatibleImage(200, 200, Transparency.TRANSLUCENT);
+		g2 = image.createGraphics();
+		// ---------- 背景透明代码结束 -----------------
+		g2.drawRect(0, 0, 0 , 0 );//设置背景为透明的时候得调用此方法
+
+		g2.drawImage(src_img,50,50,100,100,null);//把水印图片增加到当天图片上
+		ImageIO.write(image, "png", file);
+
 
 
 	}
