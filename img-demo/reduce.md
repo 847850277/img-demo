@@ -546,6 +546,67 @@ public static void createTransparentImg(String text) throws Exception{
 ```
 
 
+**背景透明图片增加图片水印:**
+
+>Image类:
+
+>抽象类 Image 是表示图形图像的所有类的超类。必须以特定于平台的方式获取图像。 
+
+>Graphics类的drawImage方法:
+
+>public abstract boolean drawImage(Image img,
+                                  int x,
+                                  int y,ImageObserver observer)
+
+>绘制指定图像中当前可用的图像。图像的左上角位于该图形上下文坐标空间的 (x, y)。图像中的透明像素不影响该处已存在的像素。 
+此方法在任何情况下都立刻返回，甚至在图像尚未完整加载，并且还没有针对当前输出设备完成抖动和转换的情况下也是如此。 
+
+>如果图像已经完整加载，并且其像素不再发生更改，则 drawImage 返回 true。否则，drawImage 返回 false，并且随着更多的图像可用或者到了绘制动画另一帧的时候，加载图像的进程将通知指定的图像观察者。 
+
+
+
+>参数：
+img - 要绘制的指定图像。如果 img 为 null，则此方法不执行任何操作。
+x - x 坐标。
+y - y 坐标。
+observer - 转换了更多图像时要通知的对象。 
+返回：
+如果图像像素仍在更改，则返回 false；否则返回 true。
+
+
+```
+
+/**
+ * 背景透明的图片增加水印
+ * @param file2 水印图片
+ * @throws Exception
+ */
+
+public static void createTransparentImg(File file2) throws  Exception{
+
+	File file = new File("H:/image.png");
+	File source_file = file2;
+	Image src_img = ImageIO.read(source_file);//水印图片文件
+	BufferedImage image = new BufferedImage(200,200,BufferedImage.TYPE_INT_RGB);
+	Graphics2D g2 = image.createGraphics();
+	// ---------- 增加下面的代码使得背景透明 -----------------
+	image = g2.getDeviceConfiguration().createCompatibleImage(200, 200, Transparency.TRANSLUCENT);
+	g2 = image.createGraphics();
+	// ---------- 背景透明代码结束 -----------------
+	g2.drawRect(0, 0, 0 , 0 );//设置背景为透明的时候得调用此方法
+
+	g2.drawImage(src_img,50,50,100,100,null);//把水印图片增加到当天图片上
+	ImageIO.write(image, "png", file);
+
+
+
+}
+
+```
+
+
+
+
 
 
 
