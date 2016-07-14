@@ -605,6 +605,72 @@ public static void createTransparentImg(File file2) throws  Exception{
 ```
 
 
+**把原图缩放50%**
+
+```
+
+/**
+ * 缩放图片,把原图缩放50%
+ * @throws Exception
+ */
+
+public static void zoomImg() throws  Exception{
+
+	File file = new File("H:/image.png");
+	BufferedImage sourceImg = ImageIO.read(file);
+
+	File targetFile = new File("H:/target.png");
+	BufferedImage image = new BufferedImage(sourceImg.getWidth()/2,sourceImg.getHeight()/2,sourceImg.getType());
+	Graphics2D g2 = image.createGraphics();
+	// ---------- 增加下面的代码使得背景透明 -----------------
+	image = g2.getDeviceConfiguration().createCompatibleImage(sourceImg.getWidth()/2,sourceImg.getWidth()/2, Transparency.TRANSLUCENT);
+	g2 = image.createGraphics();
+	// ---------- 背景透明代码结束 -----------------
+	g2.drawRect(0, 0, 0 , 0 );//设置背景为透明的时候得调用此方法
+	g2.drawImage(sourceImg,0,0,sourceImg.getWidth()/2,sourceImg.getHeight()/2,null);
+	ImageIO.write(image,"png",targetFile);
+
+}
+```
+
+**旋转图片**
+
+>Graphics类的rotate(旋转)方法:
+
+>public abstract void rotate(double theta)
+
+>将当前的 Graphics2D Transform 与旋转转换连接。后续呈现相对于前一原点旋转指定弧度。这等同于调用 transform(R)，其中 R 为以下矩阵表示的 AffineTransform： 
+                [   cos(theta)    -sin(theta)    0   ]
+                [   sin(theta)     cos(theta)    0   ]
+                [       0              0         1   ]
+ 使用正角度 theta 进行旋转，可将正 x 轴上的点转向正 y 轴。 
+
+>参数：
+theta - 旋转的角度，以弧度为单位
+
+>Graphics类的translate(旋转)方法:
+
+>public abstract void translate(int x,int y)
+
+>将 Graphics2D 上下文的原点平移到当前坐标系中的点 (x, y)。修改 Graphics2D 上下文，使其新的原点对应于此 Graphics2D 上下文原坐标系中的点 (x, y)。在此图形上下文上执行的后续呈现操作使用的所有坐标均相对于这个新原点。 
+
+>指定者：
+类 Graphics 中的 translate
+
+>参数：
+x - 指定的 x 坐标
+y - 指定的 y 坐标
+
+
+```
+
+
+
+```
+
+
+
+
 
 
 
