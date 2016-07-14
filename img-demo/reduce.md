@@ -5,6 +5,7 @@
 
 重要的类:BufferedImage(生成图像的类)
 >常用字段:
+
 <table>
    <tr>
 	  <td>类型</td>
@@ -393,6 +394,161 @@ public static void setImgBackColor() throws Exception{
 
 
 ```
+
+**在图片上面写入文字:**
+>java的字体类，以便在 Graphics 对象和 Component 对象上呈现字形序列。
+
+>设计字体显示效果 Font  font = new Font(String 字体，int 风格，int 字号);
+
+>字体：TimesRoman, Courier, Arial等
+
+>风格：三个常量 lFont.PLAIN, Font.BOLD, Font.ITALIC
+
+>字号：字的大小（磅数）
+
+>设置组件当前使用的字体：setFont(Font fn)
+
+>获取组件当前使用的字体：getFont()
+
+```
+
+/**
+ * 设置文字
+ * @throws Exception
+ */
+
+public static  void setFontImg() throws  Exception{
+
+	File file = new File("H:/image.jpg");
+	BufferedImage bi = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+	Graphics2D g2 = (Graphics2D)bi.getGraphics();
+	g2.setBackground(Color.BLACK);
+	g2.clearRect(0,0,200,200);//设置背景颜色的时候调用此方法
+	Font font = new Font("宋体", Font.PLAIN, 12);
+	g2.setFont(font);
+	g2.setColor(Color.red);//设置文字颜色，前景色
+	g2.drawString("helloWorld",50,50);//写入文字的方法
+	ImageIO.write(bi, "jpg", file);
+
+}
+```
+
+
+**创建png图片**
+
+```
+
+/**
+ * 创建png图片
+ * @throws Exception
+ */
+
+public static  void createPngImg() throws  Exception{
+
+	File file = new File("H:/image.png");
+	BufferedImage bi = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+	Graphics2D g2 = (Graphics2D)bi.getGraphics();
+	g2.setBackground(Color.MAGENTA);//背景色为紫色
+	g2.clearRect(0,0,200,200);
+	ImageIO.write(bi, "png", file);
+
+}
+
+
+```
+
+**创建gif图片:**
+
+
+```
+
+/**
+ * 创建gif图片
+ * @throws Exception
+ */
+
+public static void createGifImg() throws Exception{
+
+	File file = new File("H:/image.gif");
+	BufferedImage bi = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+	Graphics2D g2 = (Graphics2D)bi.getGraphics();
+	g2.setBackground(Color.MAGENTA);//背景色为紫色
+	g2.clearRect(0,0,200,200);
+	ImageIO.write(bi, "gif", file);
+
+
+}
+
+```
+
+
+**创建背景透明的图片**
+>Graphics类的drawRect方法:
+
+>public void drawRect(int x,
+                     int y,
+                     int width,
+                     int height)绘制指定矩形的边框。矩形的左边缘和右边缘分别位于 x 和 x + width。上边缘和下边缘分别位于 y 和 y + height。使用图形上下文的当前颜色绘制该矩形。 
+
+>参数：
+x - 要绘制矩形的 x 坐标。
+y - 要绘制矩形的 y 坐标。
+width - 要绘制矩形的宽度。
+height - 要绘制矩形的高度。
+
+
+```
+
+/**
+ * 创建背景透明图片，png和gif图片支持背景透明,而jpg不支持背景透明
+ */
+
+public static void createTransparentImg() throws Exception{
+
+	File file = new File("H:/image.png");
+	BufferedImage image = new BufferedImage(200,200,BufferedImage.TYPE_INT_RGB);
+	Graphics2D g2 = image.createGraphics();
+	// ---------- 增加下面的代码使得背景透明 -----------------
+	image = g2.getDeviceConfiguration().createCompatibleImage(200, 200, Transparency.TRANSLUCENT);
+	g2 = image.createGraphics();
+	// ---------- 背景透明代码结束 -----------------
+	g2.drawRect(0, 0, 0 , 0 );//设置背景为透明的时候得调用此方法
+	ImageIO.write(image, "png", file);
+
+
+}
+
+/**
+ * 透明背景增加文字
+ * @param text 文字
+ * @throws Exception
+ */
+
+public static void createTransparentImg(String text) throws Exception{
+
+	File file = new File("H:/image.png");
+	BufferedImage image = new BufferedImage(200,200,BufferedImage.TYPE_INT_RGB);
+	Graphics2D g2 = image.createGraphics();
+	// ---------- 增加下面的代码使得背景透明 -----------------
+	image = g2.getDeviceConfiguration().createCompatibleImage(200, 200, Transparency.TRANSLUCENT);
+	g2 = image.createGraphics();
+	// ---------- 背景透明代码结束 -----------------
+	Font font = new Font("宋体", Font.PLAIN, 12);
+	g2.setFont(font);
+	g2.setColor(Color.red);//设置文字颜色，前景色
+	g2.drawRect(0, 0, 0 , 0 );//设置背景为透明的时候得调用此方法
+	g2.drawString(text,50,50);
+	ImageIO.write(image, "png", file);
+
+
+}
+
+```
+
+
+
+
+
 
 
 
